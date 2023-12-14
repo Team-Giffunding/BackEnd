@@ -1,6 +1,5 @@
 package com.example.giffunding.service;
 
-import com.example.giffunding.dto.request.UpdateGiftRequestDto;
 import com.example.giffunding.entity.Gift;
 import com.example.giffunding.repository.GiftRepository;
 import lombok.RequiredArgsConstructor;

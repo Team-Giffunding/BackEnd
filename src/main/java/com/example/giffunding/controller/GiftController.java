@@ -1,8 +1,6 @@
 package com.example.giffunding.controller;
 
 import com.example.giffunding.dto.request.CreateGiftRequestDto;
-import com.example.giffunding.dto.request.UpdateGiftRequestDto;
-import com.example.giffunding.dto.response.GiftResponseDto;
 import com.example.giffunding.entity.Gift;
 import com.example.giffunding.entity.User;
 import com.example.giffunding.repository.UserRepository;

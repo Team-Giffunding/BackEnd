@@ -1,6 +1,5 @@
 package com.example.giffunding.service;
 
-import com.example.giffunding.dto.request.UpdateFundRequestDto;
 import com.example.giffunding.entity.Fund;
 import com.example.giffunding.repository.FundRepository;
 import com.example.giffunding.repository.GiftRepository;

@@ -5,7 +5,6 @@ import com.example.giffunding.dto.request.UpdateReviewRequestDto;
 import com.example.giffunding.dto.response.ReviewResponseDto;
 import com.example.giffunding.entity.Review;
 import com.example.giffunding.entity.User;
-import com.example.giffunding.repository.ReviewRepository;
 import com.example.giffunding.repository.UserRepository;
 import com.example.giffunding.service.ReviewService;
 import lombok.RequiredArgsConstructor;
