@@ -36,3 +36,26 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
+
+kakao:
+  client-id: YOUR_KAKAO_CLIENT_ID
+  client-secret: YOUR_KAKAO_CLIENT_SECRET
+  redirect-uri: YOUR_REDIRECT_URI
+  token-uri: https://kauth.kakao.com/oauth/token
+  user-info-uri: https://kapi.kakao.com/v2/user/me
+
+cloud:
+  aws:
+    s3:
+      bucket: giffunding
+    credentials:
+      access-key: AKIA3YKYKRYVFRDYDTVS
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+jwt:
+  secret: 3H4e3DlTawx8T0Ti79PKCeDhHngmQbuiUeSy80qAGn8=

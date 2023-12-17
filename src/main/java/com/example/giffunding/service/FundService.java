@@ -14,9 +14,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FundService {
     private final FundRepository fundRepository;
+    private final GiftService giftService;
+
     @Transactional
     public Long saveFund(Fund fund) {
         fundRepository.save(fund);
+        giftService.updateGiftPrice(fund.getGift(),fund.getPrice());
         return fund.getId();
     }
 }

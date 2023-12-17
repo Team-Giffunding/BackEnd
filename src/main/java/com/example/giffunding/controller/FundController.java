@@ -2,7 +2,9 @@ package com.example.giffunding.controller;
 
 import com.example.giffunding.dto.request.CreateFundRequestDto;
 import com.example.giffunding.entity.Fund;
+import com.example.giffunding.entity.Gift;
 import com.example.giffunding.entity.User;
+import com.example.giffunding.repository.GiftRepository;
 import com.example.giffunding.repository.UserRepository;
 import com.example.giffunding.service.FundService;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +22,23 @@ import java.util.Optional;
 public class FundController {
     private final FundService fundService;
     private final UserRepository userRepository;
+    private final GiftRepository giftRepository;
 
     //펀딩 생성
-    //선물 현재 가격 추가 로직 해야함
     @PostMapping("")
     public ResponseEntity<Long> createFund(@RequestBody CreateFundRequestDto createFundRequestDto) {
-        Optional<User> existedUser =  userRepository.findById(createFundRequestDto.getUserId());
-        if (existedUser.isEmpty()) {
+//        Optional<User> existedUser =  userRepository.findById(createFundRequestDto.getUserId());
+//        if (existedUser.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+        Optional<Gift> existedGift = giftRepository.findById(createFundRequestDto.getGiftId());
+        if (existedGift.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+
         Fund fund = Fund.builder()
-                .user(existedUser.get())
+//                .user(existedUser.get())
+                .gift(existedGift.get())
                 .nickname(createFundRequestDto.getNickname())
                 .price(createFundRequestDto.getPrice())
                 .text(createFundRequestDto.getText())

@@ -8,7 +8,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CreateFundRequestDto {
-    private Long userId;
+//    private Long userId;
+    private Long giftId;
     private String nickname;
     private Integer price;
     private String text;

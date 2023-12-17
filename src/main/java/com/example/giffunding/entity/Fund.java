@@ -15,9 +15,12 @@ public class Fund {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fund_id")
     private Long id;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "gift_id")
+    private Gift gift;
     @Column(name = "nickname")
     private String nickname;
     @Column(name = "price")
@@ -30,8 +33,9 @@ public class Fund {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Fund(User user, String nickname, Integer price, String text) {
-        this.user = user;
+    public Fund(Gift gift, String nickname, Integer price, String text) {
+//        this.user = user;
+        this.gift = gift;
         this.nickname = nickname;
         this.price = price;
         this.text = text;

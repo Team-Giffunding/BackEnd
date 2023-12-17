@@ -23,6 +23,8 @@ public class User {
     private String nickname;
     @Column(name = "email")
     private String email;
+    @Column(name = "role")
+    private String role;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
@@ -33,15 +35,16 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Gift> gifts = new ArrayList<>();
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Fund> funds = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    private List<Fund> funds = new ArrayList<>();
 
     @Builder
-    public User(String userNumber, String nickname, String email) {
+    public User(String userNumber, String nickname, String email, String role) {
         this.userNumber = userNumber;
         this.nickname = nickname;
         this.email = email;
+        this.role = role;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }

@@ -1,9 +1,12 @@
 package com.example.giffunding.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,6 +33,9 @@ public class Gift {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @JsonIgnore
+    @OneToMany(mappedBy = "gift", cascade = CascadeType.REMOVE)
+    private List<Fund> funds = new ArrayList<>();
 
     @Builder
     public Gift(User user, String name, Integer totalPrice, String photoUrl) {
@@ -40,6 +46,10 @@ public class Gift {
         this.photoUrl = photoUrl;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void updateGiftPrice(Integer price) {
+        this.price = price;
     }
 
 

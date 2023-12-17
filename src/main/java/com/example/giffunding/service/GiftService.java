@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,16 @@ public class GiftService {
         giftRepository.save(gift);
         return gift.getId();
     }
+
+    public List<Gift> getGiftsByUserId(Long userId) {
+        return giftRepository.findByUserId(userId);
+    }
+
+    @Transactional
+    public void updateGiftPrice(Gift gift, Integer price) {
+        gift.updateGiftPrice(price);
+    }
+
     public Optional<Gift> getGift(Long gift_id){
         return giftRepository.findById(gift_id);
     }
