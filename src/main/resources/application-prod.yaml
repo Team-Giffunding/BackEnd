@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_URL}/haruhanal?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_URL}/giffunding?createDatabaseIfNotExist=true
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     hikari:
@@ -14,7 +14,7 @@ spring:
       connection-test-query: SELECT 1
       minimum-idle: 10
       maximum-pool-size: 20
-      pool-name: haruhanal-user-pool
+      pool-name: giffunding-user-pool
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -38,9 +38,9 @@ logging.level:
   org.hibernate.SQL: debug
 
 kakao:
-  client-id: YOUR_KAKAO_CLIENT_ID
-  client-secret: YOUR_KAKAO_CLIENT_SECRET
-  redirect-uri: YOUR_REDIRECT_URI
+  client-id: ${KAKAO_CLIENT_ID}
+  client-secret: ${KAKAO_CLIENT_SECRET}
+  redirect-uri: ${REDIRECT_URI}
   token-uri: https://kauth.kakao.com/oauth/token
   user-info-uri: https://kapi.kakao.com/v2/user/me
 
