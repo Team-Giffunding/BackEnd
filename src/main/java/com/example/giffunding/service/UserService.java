@@ -64,7 +64,7 @@ public class UserService {
 
         Optional<User> userData = userRepository.findByUserNumber(String.valueOf(userInfo.getId()));
 
-        if(userData.isEmpty()){
+        if (userData.isEmpty()) {
             user = User.builder()
                     .userNumber(String.valueOf(userInfo.getId()))
                     .role("USER")
@@ -73,25 +73,45 @@ public class UserService {
                     .build();
 
             userRepository.save(user);
+
+            Optional<User> userLoginData = userRepository.findByUserNumber(String.valueOf(userInfo.getId()));
+            String refreshToken = "Bearer " + jwtTokenProvider.createRereshToken(userLoginData.get().getId());
+            KakaoLoginResponseDto tokenResponseDto = KakaoLoginResponseDto.builder()
+                    .message("OK")
+                    .code(200)
+                    .accessToken("Bearer " + jwtTokenProvider.createAccessToken(
+                            userLoginData.get().getId(),
+                            String.valueOf(userLoginData.get().getRole())))
+                    .refreshToken(refreshToken)
+                    .userId(userLoginData.get().getId())
+                    .email(userLoginData.get().getEmail())
+                    .nickname(userLoginData.get().getNickname())
+                    .existed(0)
+                    .build();
+
+            saveOrUpdateRefreshToken(userLoginData.get().getId(), refreshToken);
+
+            return tokenResponseDto;
+        } else {
+            Optional<User> userLoginData = userRepository.findByUserNumber(String.valueOf(userInfo.getId()));
+            String refreshToken = "Bearer " +jwtTokenProvider.createRereshToken(userLoginData.get().getId());
+            KakaoLoginResponseDto tokenResponseDto = KakaoLoginResponseDto.builder()
+                    .message("OK")
+                    .code(200)
+                    .accessToken("Bearer " +jwtTokenProvider.createAccessToken(
+                            userLoginData.get().getId(),
+                            String.valueOf(userLoginData.get().getRole())))
+                    .refreshToken(refreshToken)
+                    .userId(userLoginData.get().getId())
+                    .email(userLoginData.get().getEmail())
+                    .nickname(userLoginData.get().getNickname())
+                    .existed(1)
+                    .build();
+
+            saveOrUpdateRefreshToken(userLoginData.get().getId(), refreshToken);
+
+            return tokenResponseDto;
         }
-
-        Optional<User> userLoginData = userRepository.findByUserNumber(String.valueOf(userInfo.getId()));
-        String refreshToken = "Bearer " +jwtTokenProvider.createRereshToken(userLoginData.get().getId());
-        KakaoLoginResponseDto tokenResponseDto = KakaoLoginResponseDto.builder()
-                .message("OK")
-                .code(200)
-                .accessToken("Bearer " +jwtTokenProvider.createAccessToken(
-                        userLoginData.get().getId(),
-                        String.valueOf(userLoginData.get().getRole())))
-                .refreshToken(refreshToken)
-                .userId(userLoginData.get().getId())
-                .email(userLoginData.get().getEmail())
-                .nickname(userLoginData.get().getNickname())
-                .build();
-
-        saveOrUpdateRefreshToken(userLoginData.get().getId(), refreshToken);
-
-        return tokenResponseDto;
     }
 
     private void saveOrUpdateRefreshToken(Long userId, String refreshToken) {

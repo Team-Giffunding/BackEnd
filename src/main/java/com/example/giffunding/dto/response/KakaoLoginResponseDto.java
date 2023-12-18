@@ -16,4 +16,5 @@ public class KakaoLoginResponseDto {
     private Long userId;
     private String email;
     private String nickname;
+    private Integer existed;
 }
