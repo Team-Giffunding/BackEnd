@@ -69,7 +69,7 @@ jobs:
         id: deploy-prod
         if: contains(github.ref, 'main')
         with:
-          host: ${{ secrets.HOST }} # EC2 퍼블릭 IPv4 DN
+          host: ${{ secrets.HOST }} # EC2 퍼블릭 IPv4
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
